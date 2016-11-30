@@ -1,0 +1,31 @@
+<h3>Courses</h3>
+
+<a href="newstudent.php" class="pull-right">New Student</a>
+<a href="#/instructors" class="pull-right">View Instructors |</a>
+<a href="#/students" class="pull-right">View Students |</a>
+
+
+    <div ng-controller="CourseController">
+       <div class="input-group add-on" style="width:40%">
+         <input class="form-control" ng-model="searchFilter" placeholder="Search" name="srch-term" id="srch-term" type="text">
+         <div class="input-group-btn">
+         <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+      </div>
+    </div>
+         <table class="table table-striped">
+             <thead>
+                 <tr>
+                     <th>Course name</th>
+                     <th>Duration</th>
+                     <th>Action</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 <tr ng-repeat="courses in data | filter:searchFilter">
+                     <td>{{courses.coursename}}</td>
+                     <td>{{courses.duration}}</td>
+                     <td><a href="{{courses.edit}}">Edit</a> <a href="{{courses.delete}}">Delete</a></td>
+                 </tr>
+             </tbody>
+      </table>
+   </div>

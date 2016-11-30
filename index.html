@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="University">
+
+  <head>
+    <meta charset="utf-8" />
+        <title>University</title>
+       <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.css" rel="stylesheet">
+       <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>
+  </head>
+
+  <body>
+  
+    <div class="jumbotron">
+      <div class="container">
+       <!-- <div class="col-xs-offset-2 col-xs-8"> -->
+              <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div> 
+          <div ng-view></div>
+       <!-- </div> -->
+      </div>
+    </div>
+
+
+
+    <script src="//code.angularjs.org/1.2.20/angular.js"></script>
+    <script src="//code.angularjs.org/1.2.20/angular-route.js"></script>
+    <script src="//code.angularjs.org/1.2.13/angular-cookies.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="modules/students/controllers.js"></script>
+    <script src="modules/instructors/controllers.js"></script>
+    <script src="modules/courses/controllers.js"></script>
+  </body>
+
+</html>
