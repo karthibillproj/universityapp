@@ -11,17 +11,16 @@ if ($conn->connect_error) {
 $sql = "SELECT * FROM courses";
 
 $result = $conn->query($sql);
-
+$coursedata = array();
 if ($result->num_rows > 0) { 
    $coursedata = array();
  while($row = $result->fetch_assoc()) {
- 		$id = $row['id'];
- 		$coursename = $row['coursename'];
-   		$coursedata[$id] = $coursename;
+ 		$coursename['id'] = $row['id'];
+ 		$coursename['coursename'] = $row['coursename'];
+   		$coursedata[] = $coursename;
     } 
 
-  } else {
-     $coursedata =  "0 results";
   }
 $conn->close(); 
+echo json_encode($coursedata); exit;
 ?>

@@ -24,24 +24,94 @@ angular.module('University')
 .controller('AddstudentController',
     ['$scope', '$http', function ($scope, $http) {
 
-        $scope.submitForm = function() {
-             /* $http({
-                    url: "api/addstudentpost.php",
-                    method: "POST",
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    data: $.param($scope.formdata)
-                }).success(function(data, status, headers, config) {
-                    $scope.status = status;
-                }).error(function(data, status, headers, config) {
-                    $scope.status = status;
-                }); 
-                */
+         $http.get("api/getcourse.php")
+                .success(function(data){
+                    $scope.coursedata = data;
+                })
+                .error(function() {
+                    $scope.coursedata = "error in fetching data";
+                });
 
+         $scope.student = {};
+
+        $scope.submitForm = function() {
                 $http({
                     method: 'POST',
                     url: 'api/addstudentpost.php',
-                    data: "message=a",
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    data: $.param($scope.student),
+                   headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+                }) .success(function(data) {
+                    console.log(data);
+                        if (!data.success) {
+                            $scope.errormessage = data.errors;
+                        } else {
+                            // if successful, bind success message to message
+                            $scope.message = data.message;
+                        }
                 });
-            }; 
+            };
+
         }]);
+angular.module('University')
+.controller('EditstudentController',
+    ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+             var currentId = $routeParams.id;
+              $http.get("api/getcourse.php")
+                .success(function(data){
+                    $scope.coursedata = data;
+                  // $scope.courses = data;
+                })
+                .error(function() {
+                    $scope.coursedata = "error in fetching data";
+                });
+
+                 $scope.student = {};
+              $http.get("api/getstudent.php?id="+currentId)
+                .success(function(data){
+                    $scope.student.studentid = data.studentid;
+                    $scope.student.first_name = data.first_name;
+                    $scope.student.last_name = data.last_name;
+                    $scope.student.email = data.email;
+                    $scope.student.dob = data.dob; 
+                })
+                .error(function() {
+                    $scope.errormessage = "error in fetching data";
+                });
+
+              $scope.submitForm = function() {
+                $http({
+                    method: 'POST',
+                    url: 'api/addstudentpost.php',
+                    data: $.param($scope.student),
+                   headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+                }) .success(function(data) {
+                    console.log(data);
+                        if (!data.success) {
+                            $scope.errormessage = data.errors;
+                        } else {
+                            // if successful, bind success message to message
+                            $scope.message = data.message;
+                        }
+                });
+            };
+
+           
+        }]);
+
+angular.module('University')
+.controller('DeletestudentController',
+    ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+             var currentId = $routeParams.id;
+                
+            $http.get("api/addstudentpost.php?delete="+currentId)
+                .success(function(data){
+                   $scope.message = "Delete successfully";
+                })
+                .error(function() {
+                    $scope.errormessage = "error in fetching data";
+                }); 
+
+
+           
+        }]);
+

@@ -8,11 +8,12 @@ $result = $conn->query($sql);
 $students = array();
 if ($result->num_rows > 0) { 
 
+  $baseurl = str_replace("api","#", getBaseUrl());
    
    while($row = $result->fetch_assoc()) {
 
-  		$editurl = getBaseUrl().'editstudent.php?id='.$row['id'];
-  		$deleteurl = getBaseUrl().'addstudentpost.php?delete='.$row['id'];
+  		$editurl = $baseurl.'editstudent/'.$row['id'];
+  		$deleteurl = $baseurl.'deletestudent/'.$row['id'];
        $student['first_name'] = $row['first_name'];
        $student['last_name'] = $row['last_name'];
        $student['email'] = $row['email'];

@@ -1,15 +1,15 @@
- <div ng-controller="AddstudentController">
+ <div ng-controller="EditstudentController">
 <div id="messages" class="well" ng-show="message">{{ message }}</div>
 <div id="messages" class="well" ng-show="errormessage">{{ errormessage }}</div>
-<form class="well form-horizontal" name="addstudent" role="addstudent" ng-submit="submitForm()">
+<form class="well form-horizontal" name="editstudent" role="editstudent" ng-submit="submitForm()">
     <a href="#/students" class="pull-right">View Students</a>
 <fieldset>
 
 <!-- Form Name -->
 
-<legend>Add students</legend>
+<legend>Edit student</legend>
 
-
+ <input  name="studentid" ng-model="student.studentid" type="hidden">
 <!-- Text input-->
 
 <div class="form-group">
@@ -19,7 +19,7 @@
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
   <input  name="first_name" placeholder="First Name" class="form-control" ng-model="student.first_name" type="text" required>
     </div>
-     <span ng-show="addstudent.first_name.$dirty && addstudent.first_name.$error.required" class="help-block">Firstname is required</span>
+     <span ng-show="editstudent.first_name.$dirty && editstudent.first_name.$error.required" class="help-block">Firstname is required</span>
   </div>
 </div>
 
@@ -30,9 +30,9 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="last_name" placeholder="Last Name" class="form-control" ng-model="student.last_name" type="text" required>
+  <input name="last_name" placeholder="Last Name" class="form-control" ng-model="student.last_name" type="text"  required>
     </div>
-     <span ng-show="addstudent.last_name.$dirty && addstudent.last_name.$error.required" class="help-block">Lastname is required</span>
+     <span ng-show="editstudent.last_name.$dirty && editstudent.last_name.$error.required" class="help-block">Lastname is required</span>
   </div>
 </div>
 
@@ -44,8 +44,8 @@
         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
   <input name="email" placeholder="E-Mail Address" class="form-control" ng-model="student.email"  type="email" required>
     </div>
-     <span ng-show="addstudent.email.$dirty && addstudent.email.$error.required" class="help-block">Email is required</span>
-     <span ng-show="addstudent.email.$error.email" class="help-block">Invalid email address</span>
+     <span ng-show="editstudent.email.$dirty && editstudent.email.$error.required" class="help-block">Email is required</span>
+     <span ng-show="editstudent.email.$error.email" class="help-block">Invalid email address</span>
   </div>
 </div>
 
@@ -57,8 +57,8 @@
         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
         <input type="date" name="dob" placeholder="DD/MM/YYYY" class="form-control" ng-model="student.dob"  required>
     </div>
-     <span ng-show="addstudent.dob.$dirty && addstudent.dob.$error.required" class="help-block">Date of Birth is required</span>
-     <span ng-show="addstudent.dob.$error.date" class="help-block">Invalid date</span>
+     <span ng-show="editstudent.dob.$dirty && editstudent.dob.$error.required" class="help-block">Date of Birth is required</span>
+     <span ng-show="editstudent.dob.$error.date" class="help-block">Invalid date</span>
   </div>
 </div>
 
@@ -70,15 +70,17 @@
     <div class="col-md-4 selectContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-    <select name="course[]" class="form-control selectpicker" ng-multiple="true" ng-model="student.course"  multiple="multiple">
+   <select name="course[]" class="form-control selectpicker" ng-multiple="true" ng-model="student.course"  multiple="multiple" required>
       <option value=" " >Please select your Course</option>
        <option ng-repeat="courses in coursedata" value="{{courses.id}}">
            {{courses.coursename}}
        </option>
-    <!--  <option value="1">Maths</option>
-      <option value="2">Science</option>
-      <option value="3">English</option> -->
-    </select>
+    </select> 
+
+   <!-- <select multiple class="form-control" name="course[]"
+    data-ng-model="student.courses" 
+    data-ng-options="course.coursename for course in courses track by course.id" 
+    required=""></select> -->
   </div>
 </div>
 </div>
@@ -90,7 +92,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label"></label>
   <div class="col-md-4">
-    <button type="submit" ng-disabled="addstudent.$invalid" class="btn btn-warning" >Submit <span class="glyphicon glyphicon-send"></span></button>
+    <button type="submit" ng-disabled="editstudent.$invalid" class="btn btn-warning" >Submit <span class="glyphicon glyphicon-send"></span></button>
   </div>
 </div>
 

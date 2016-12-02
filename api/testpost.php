@@ -3,16 +3,14 @@
 include_once('database.php');
 
 
+$firstname = $_POST['first_name'];
+$lastname =  $_POST['last_name'];
+$email = $_POST['email'];
+$dob = $_POST['dob'];
+$courses = array_filter($_POST['course']);
+
 
 if(!empty($_POST) || !empty($_GET['delete'])){
-
-if(!empty($_POST)){
-	$firstname = $_POST['first_name'];
-	$lastname =  $_POST['last_name'];
-	$email = $_POST['email'];
-	$dob = $_POST['dob'];
-	$courses = array_filter($_POST['course']);
-}
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 // Check connection
@@ -99,7 +97,7 @@ mysqli_close($conn);
 
 		// if there are no errors, return a message
 		$data['success'] = true;
-		$data['message'] = 'Student added successfully!';
+		$data['message'] = 'Success!';
 	}
 
 	// return all our data to an AJAX call
