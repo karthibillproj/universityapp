@@ -58,12 +58,22 @@ angular.module('University')
              var currentId = $routeParams.id;
               $http.get("api/getcourse.php")
                 .success(function(data){
-                    $scope.coursedata = data;
-                  // $scope.courses = data;
+                   // $scope.coursedata = data;
+                    $scope.courses = data;
                 })
                 .error(function() {
                     $scope.coursedata = "error in fetching data";
                 });
+
+                 $http.get("api/getcourse.php?studentid="+currentId)
+                .success(function(data){
+                    //$scope.coursedata = data;
+                   $scope.student.course = data;
+                })
+                .error(function() {
+                    $scope.coursedata = "error in fetching data";
+                });
+
 
                  $scope.student = {};
               $http.get("api/getstudent.php?id="+currentId)

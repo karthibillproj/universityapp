@@ -13,6 +13,7 @@ if(!empty($_POST)){
 	$dob = $_POST['dob'];
 	$courses = array_filter($_POST['course']);
 }
+
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 // Check connection
@@ -20,6 +21,11 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 if(isset($_POST['studentid'])){
+	$coursedata = $courses;
+	$courses = array();
+	foreach($coursedata as $course){
+		$courses[] = $course['id'];
+	}
 	$studentid = $_POST['studentid'];
 	$sql = "UPDATE students SET first_name = '$firstname',last_name = '$lastname',email='$email',dob='$dob' WHERE id='$studentid'";
 	 if ($conn->query($sql) === TRUE) {

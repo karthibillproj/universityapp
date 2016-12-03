@@ -70,17 +70,17 @@
     <div class="col-md-4 selectContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-   <select name="course[]" class="form-control selectpicker" ng-multiple="true" ng-model="student.course"  multiple="multiple" required>
+   <!-- <select name="course[]" class="form-control selectpicker" ng-multiple="true" ng-model="student.course"  multiple="multiple" required>
       <option value=" " >Please select your Course</option>
        <option ng-repeat="courses in coursedata" value="{{courses.id}}">
            {{courses.coursename}}
        </option>
-    </select> 
+    </select>  -->
 
-   <!-- <select multiple class="form-control" name="course[]"
-    data-ng-model="student.courses" 
+    <select multiple class="form-control" name="course[]"
+    data-ng-model="student.course" 
     data-ng-options="course.coursename for course in courses track by course.id" 
-    required=""></select> -->
+    required=""></select> 
   </div>
 </div>
 </div>
