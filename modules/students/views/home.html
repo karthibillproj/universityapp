@@ -1,5 +1,6 @@
 <h3>Students</h3>
-
+<div class="alert alert-danger none"><p></p></div>
+<div class="alert alert-success none"><p></p></div>
 <a href="#/addstudent" class="pull-right">New Student</a>
 <a href="#/instructors" class="pull-right">View Instructors |</a>
 <a href="#/courses" class="pull-right">View Courses |</a>
@@ -28,8 +29,9 @@
                      <td>{{students.last_name}}</td>
                      <td>{{students.email}}</td>
                      <td>{{students.dob}}</td>
-                     <td><a href="{{students.edit}}">Edit</a> <a href="{{students.delete}}">Delete</a></td>
+                     <td><a href="{{students.edit}}">Edit</a> <a href="javascript:void(0);" ng-click="deleteUser(students)">Delete</a></td>
                  </tr>
              </tbody>
       </table>
    </div>
+

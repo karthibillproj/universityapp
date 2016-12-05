@@ -17,6 +17,39 @@ angular.module('University')
                 .error(function() {
                     $scope.data = "error in fetching data";
                 });
+
+                 $scope.deleteUser = function(students){
+                    var conf = confirm('Are you sure to delete the student?');
+                    if(conf === true){
+                       var currentId = students.id;
+                         $http.get("api/students.php?delete="+currentId)
+                            .success(function(data){
+                                var index = $scope.data.indexOf(students);
+                                $scope.data.splice(index,1);
+                                 $scope.messageSuccess('Student deleted succesffully');
+                            })
+                            .error(function() {
+                                $scope.messageError('Student not deleted');
+                            }); 
+                    }
+                };
+
+                 $scope.messageSuccess = function(msg){
+                    $('.alert-success > p').html(msg);
+                    $('.alert-success').show();
+                    $('.alert-success').delay(5000).slideUp(function(){
+                        $('.alert-success > p').html('');
+                    });
+                };
+                
+                // function to display error message
+                $scope.messageError = function(msg){
+                    $('.alert-danger > p').html(msg);
+                    $('.alert-danger').show();
+                    $('.alert-danger').delay(5000).slideUp(function(){
+                        $('.alert-danger > p').html('');
+                    });
+                };
         }]);
 
 angular.module('University')
@@ -100,7 +133,7 @@ angular.module('University')
                             $scope.errormessage = data.errors;
                         } else {
                             // if successful, bind success message to message
-                            $scope.message = data.message;
+                            $scope.message = 'Student updated successfully';
                         }
                 });
             };
@@ -108,14 +141,16 @@ angular.module('University')
            
         }]);
 
+
 angular.module('University')
 .controller('DeletestudentController',
     ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
              var currentId = $routeParams.id;
                 
-            $http.get("api/addstudentpost.php?delete="+currentId)
+          //  $http.get("api/addstudentpost.php?delete="+currentId)
+            $http.get("api/students.php?delete="+currentId)
                 .success(function(data){
-                   $scope.message = "Delete successfully";
+                    $scope.data = data;
                 })
                 .error(function() {
                     $scope.errormessage = "error in fetching data";
