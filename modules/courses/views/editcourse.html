@@ -1,4 +1,4 @@
- <div ng-controller="EditstudentController">
+ <div ng-controller="EditcourseController">
 <div id="messages" class="well" ng-show="message">{{ message }}</div>
 <div id="messages" class="well" ng-show="errormessage">{{ errormessage }}</div>
 <form class="well form-horizontal" name="editcourse" role="editcourse" ng-submit="submitForm()">
@@ -6,8 +6,8 @@
 <fieldset>
 
 <!-- Form Name -->
-<legend>Add Course</legend>
-
+<legend>Edit Course</legend>
+<input  name="courseid" ng-model="course.courseid" type="hidden">
 <!-- Text input-->
 
 <div class="form-group">

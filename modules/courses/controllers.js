@@ -86,13 +86,11 @@ angular.module('University')
 
 
                  $scope.course = {};
-              $http.get("api/getcourse.php?id="+currentId)
+              $http.get("api/getsinglecourse.php?id="+currentId)
                 .success(function(data){
-                    $scope.student.studentid = data.studentid;
-                    $scope.student.first_name = data.first_name;
-                    $scope.student.last_name = data.last_name;
-                    $scope.student.email = data.email;
-                    $scope.student.dob = data.dob; 
+                    $scope.course.courseid = data.id;
+                    $scope.course.coursename = data.coursename;
+                    $scope.course.duration = data.duration;
                 })
                 .error(function() {
                     $scope.errormessage = "error in fetching data";

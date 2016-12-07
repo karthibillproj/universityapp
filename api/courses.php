@@ -14,11 +14,12 @@ $result = $conn->query($sql);
 $students = array();
 if ($result->num_rows > 0) { 
 
-   
+   $baseurl = str_replace("api","#", getBaseUrl());
+      
    while($row = $result->fetch_assoc()) {
 
-      $editurl = getBaseUrl().'editcourse.php?id='.$row['id'];
-      $deleteurl = getBaseUrl().'addcourse.php?delete='.$row['id'];
+      $editurl = $baseurl.'editcourse/'.$row['id'];
+      $deleteurl = $baseurl.'addcourse.php?delete='.$row['id'];
        $course['id'] = $row['id'];
        $course['coursename'] = $row['coursename'];
        $course['duration'] = $row['duration'];
