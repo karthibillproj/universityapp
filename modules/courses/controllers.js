@@ -17,4 +17,102 @@ angular.module('University')
                 .error(function() {
                     $scope.data = "error in fetching data";
                 });
+
+
+                 $scope.deleteCourse = function(courses){
+                    var conf = confirm('Are you sure to delete the course?');
+                    if(conf === true){
+                       var currentId = courses.id;
+                         $http.get("api/courses.php?delete="+currentId)
+                            .success(function(data){
+                                var index = $scope.data.indexOf(courses);
+                                $scope.data.splice(index,1);
+                                 $scope.messageSuccess('Course deleted succesffully');
+                            })
+                            .error(function() {
+                                $scope.messageError('Course not deleted');
+                            }); 
+                    }
+                };
+
+                 $scope.messageSuccess = function(msg){
+                    $('.alert-success > p').html(msg);
+                    $('.alert-success').show();
+                    $('.alert-success').delay(5000).slideUp(function(){
+                        $('.alert-success > p').html('');
+                    });
+                };
+                
+                // function to display error message
+                $scope.messageError = function(msg){
+                    $('.alert-danger > p').html(msg);
+                    $('.alert-danger').show();
+                    $('.alert-danger').delay(5000).slideUp(function(){
+                        $('.alert-danger > p').html('');
+                    });
+                };
+        }]);
+
+angular.module('University')
+
+.controller('AddcourseController',
+    ['$scope', '$http', function ($scope, $http) {
+
+
+         $scope.course = {};
+
+        $scope.submitForm = function() {
+                $http({
+                    method: 'POST',
+                    url: 'api/addcoursepost.php',
+                    data: $.param($scope.course),
+                   headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+                }) .success(function(data) {
+                        if (!data.success) {
+                            $scope.errormessage = data.errors;
+                        } else {
+                            // if successful, bind success message to message
+                            $scope.message = data.message;
+                        }
+                });
+            };
+
+        }]);
+
+angular.module('University')
+.controller('EditcourseController',
+    ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+             var currentId = $routeParams.id;
+
+
+                 $scope.course = {};
+              $http.get("api/getcourse.php?id="+currentId)
+                .success(function(data){
+                    $scope.student.studentid = data.studentid;
+                    $scope.student.first_name = data.first_name;
+                    $scope.student.last_name = data.last_name;
+                    $scope.student.email = data.email;
+                    $scope.student.dob = data.dob; 
+                })
+                .error(function() {
+                    $scope.errormessage = "error in fetching data";
+                });
+
+              $scope.submitForm = function() {
+                $http({
+                    method: 'POST',
+                    url: 'api/addcoursepost.php',
+                    data: $.param($scope.course),
+                   headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+                }) .success(function(data) {
+                        if (!data.success) {
+                            $scope.errormessage = data.errors;
+                        } else {
+                            // if successful, bind success message to message
+                            $scope.message = 'Course updated successfully';
+                        }
+                });
+            };
+
+           
         }]);

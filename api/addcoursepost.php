@@ -32,9 +32,20 @@ if(isset($_POST['courseid'])){
 
 mysqli_close($conn);
 
-$url = getBaseUrl().'courses.php';
+    if ($result != 'success') {
 
-header('Location: ' . $url);
+        // if there are items in our errors array, return those errors
+        $data['success'] = false;
+        $data['errors']  = $result;
+    } else {
+
+        // if there are no errors, return a message
+        $data['success'] = true;
+        $data['message'] = 'Student added successfully!';
+    }
+
+    echo json_encode($data);
+
 
 exit;
 

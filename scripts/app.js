@@ -42,6 +42,14 @@ angular.module('University', [
             controller: 'CourseController',
             templateUrl: 'modules/courses/views/home.html'
         })
+            .when('/addcourse', {
+            controller: 'AddcourseController',
+            templateUrl: 'modules/courses/views/addcourse.html'
+        })
+           .when('/editcourse/:id', {
+            controller: 'EditcourseController',
+            templateUrl: 'modules/courses/views/editcourse.html'
+        })
  
         .otherwise({ redirectTo: '/' });
 }]);

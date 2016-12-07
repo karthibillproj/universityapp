@@ -1,6 +1,7 @@
 <h3>Courses</h3>
-
-<a href="newstudent.php" class="pull-right">New Student</a>
+<div class="alert alert-danger none"><p></p></div>
+<div class="alert alert-success none"><p></p></div>
+<a href="#/addcourse" class="pull-right">New Course</a>
 <a href="#/instructors" class="pull-right">View Instructors |</a>
 <a href="#/students" class="pull-right">View Students |</a>
 
@@ -24,7 +25,7 @@
                  <tr ng-repeat="courses in data | filter:searchFilter">
                      <td>{{courses.coursename}}</td>
                      <td>{{courses.duration}}</td>
-                     <td><a href="{{courses.edit}}">Edit</a> <a href="{{courses.delete}}">Delete</a></td>
+                     <td><a href="{{courses.edit}}">Edit</a> <a href="javascript:void(0);" ng-click="deleteCourse(courses)">Delete</a></td>
                  </tr>
              </tbody>
       </table>
