@@ -18,6 +18,11 @@ if (!$conn) {
 }
 
 if(isset($_POST['instructorid'])){
+  $coursedata = $courses;
+  $courses = array();
+  foreach($coursedata as $course){
+    $courses[] = $course['id'];
+  }
 	$instructorid = $_POST['instructorid'];
 	$sql = "UPDATE instructors SET first_name = '$firstname',last_name = '$lastname',email='$email',qualification='$qualification' WHERE id='$instructorid'";
      if ($conn->query($sql) === TRUE) {
@@ -117,11 +122,19 @@ if(isset($_POST['instructorid'])){
 
 mysqli_close($conn);
 
+  if ($result != 'success') {
 
-$url = getBaseUrl().'instructors.php';
+    // if there are items in our errors array, return those errors
+    $data['success'] = false;
+    $data['errors']  = $result;
+  } else {
 
-header('Location: ' . $url);
+    // if there are no errors, return a message
+    $data['success'] = true;
+    $data['message'] = 'Instructor added successfully!';
+  }
 
-exit;
+  // return all our data to an AJAX call
+  echo json_encode($data);
 
 ?> 

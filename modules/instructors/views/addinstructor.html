@@ -1,0 +1,99 @@
+ <div ng-controller="AddinstructorController">
+<div id="messages" class="well" ng-show="message">{{ message }}</div>
+<div id="messages" class="well" ng-show="errormessage">{{ errormessage }}</div>
+<form class="well form-horizontal" name="addinstructor" role="addinstructor" ng-submit="submitForm()">
+    <a href="#/instructors" class="pull-right">View Instructor</a>
+<fieldset>
+
+<!-- Form Name -->
+
+<legend>Add instructor</legend>
+
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">First Name</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input  name="first_name" placeholder="First Name" class="form-control" ng-model="instructor.first_name" type="text" required>
+    </div>
+     <span ng-show="addinstructor.first_name.$dirty && addinstructor.first_name.$error.required" class="help-block">Firstname is required</span>
+  </div>
+</div>
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label" >Last Name</label> 
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input name="last_name" placeholder="Last Name" class="form-control" ng-model="instructor.last_name" type="text" required>
+    </div>
+     <span ng-show="addinstructor.last_name.$dirty && addinstructor.last_name.$error.required" class="help-block">Lastname is required</span>
+  </div>
+</div>
+
+<!-- Text input-->
+ <div class="form-group">
+  <label class="col-md-4 control-label">E-Mail</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+  <input name="email" placeholder="E-Mail Address" class="form-control" ng-model="instructor.email"  type="email" required>
+    </div>
+     <span ng-show="addinstructor.email.$dirty && addinstructor.email.$error.required" class="help-block">Email is required</span>
+     <span ng-show="addinstructor.email.$error.email" class="help-block">Invalid email address</span>
+  </div>
+</div>
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Qualification</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
+      <input ng-model="instructor.qualification" name="qualification" placeholder="Qualification" class="form-control"  type="text">
+    </div>
+     <span ng-show="addinstructor.qualification.$dirty && addinstructor.qualification.$error.required" class="help-block">Qualification is required</span>
+  </div>
+</div>
+
+
+<!-- Select Basic -->
+   
+<div class="form-group"> 
+  <label class="col-md-4 control-label">Course</label>
+    <div class="col-md-4 selectContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select name="course[]" class="form-control selectpicker" ng-multiple="true" ng-model="instructor.course"  multiple="multiple" required>
+      <option value=" " >Please select your Course</option>
+       <option ng-repeat="courses in coursedata" value="{{courses.id}}">
+           {{courses.coursename}}
+       </option>
+    <!--  <option value="1">Maths</option>
+      <option value="2">Science</option>
+      <option value="3">English</option> -->
+    </select>
+  </div>
+</div>
+</div>
+
+<!-- Success message -->
+<!-- <div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Thanks for contacting us, we will get back to you shortly.</div> -->
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4">
+    <button type="submit" ng-disabled="addinstructor.$invalid" class="btn btn-warning" >Submit <span class="glyphicon glyphicon-send"></span></button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+</div>

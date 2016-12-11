@@ -34,6 +34,14 @@ angular.module('University', [
             controller: 'DeletestudentController',
             templateUrl: 'modules/students/views/home.html'
         })
+            .when('/addinstructor', {
+            controller: 'AddinstructorController',
+            templateUrl: 'modules/instructors/views/addinstructor.html'
+        })
+            .when('/editinstructor/:id', {
+            controller: 'EditinstructorController',
+            templateUrl: 'modules/instructors/views/editinstructor.html'
+        })
           .when('/instructors', {
             controller: 'InstructorController',
             templateUrl: 'modules/instructors/views/home.html'

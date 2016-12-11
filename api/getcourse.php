@@ -20,7 +20,19 @@ if(isset($_GET['studentid'])){
 
   }
 	 $sql = "SELECT * FROM courses WHERE id IN (".$courseid.")"; 
-}else{
+}else if(isset($_GET['instructorid'])){
+  $instructorid = $_GET['instructorid'];
+  $selectquery = "SELECT course_id from instructor_courses where instructor_id = ".$instructorid;
+  $result = $conn->query($selectquery);
+  if($result->num_rows > 0) { 
+ while($row = $result->fetch_assoc()) {
+    $courseid = $row['course_id'];
+    } 
+
+  }
+   $sql = "SELECT * FROM courses WHERE id IN (".$courseid.")"; 
+}
+else{
 	$sql = "SELECT * FROM courses";
 }
 
